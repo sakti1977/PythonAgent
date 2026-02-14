@@ -29,10 +29,16 @@ cd PythonAgent
 pip install anthropic python-dotenv
 ```
 
-3. Create a `.env` file in the project root and add your Anthropic API key:
-```
-ANTHROPIC_API_KEY=your-api-key-here
-```
+3. Set up your environment variables:
+   - Copy the `.env.example` file to create your own `.env` file:
+     ```bash
+     cp .env.example .env
+     ```
+   - Open `.env` and replace `your-api-key-here` with your actual Anthropic API key:
+     ```
+     ANTHROPIC_API_KEY=sk-ant-api03-your-actual-key-here
+     ```
+   - **Important**: The `.env` file is gitignored and will not be committed to version control. Never commit API keys to git!
 
 ## Usage
 
@@ -123,7 +129,9 @@ Generated code will be saved to `output/analyze_data.py` with:
 PythonAgent/
 ├── agent.py           # Main agent code
 ├── output/            # Generated code output directory
-├── .env              # API key configuration (create this)
+├── .env              # API key configuration (create from .env.example, gitignored)
+├── .env.example      # Template for environment variables
+├── .gitignore        # Git ignore file (includes .env)
 └── README.md         # This file
 ```
 
@@ -151,6 +159,19 @@ Contributions are welcome! Feel free to:
 - Report bugs
 - Suggest new features
 - Submit pull requests
+
+## Security
+
+**Important Security Notes:**
+
+- **Never commit your `.env` file** to version control. It contains sensitive API keys.
+- The `.env` file is included in `.gitignore` to prevent accidental commits.
+- Always use `.env.example` as a template and create your own `.env` file locally.
+- If you accidentally committed your API key, you should:
+  1. Immediately revoke the exposed API key from your Anthropic account
+  2. Generate a new API key
+  3. Update your local `.env` file with the new key
+  4. Remove the key from git history (consider using `git filter-branch` or tools like BFG Repo-Cleaner)
 
 ## License
 
